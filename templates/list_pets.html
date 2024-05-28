@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} Pet Listing {% endblock %}
+
+{% block content %}
+
+<h1>Pets Available For Adoption</h1>
+
+<div>
+    {% for pet in pets %}
+    <table>
+        <tr>
+            <td>Species: {{pet.species}}</td>
+        </tr>
+        <tbody>
+            <td>
+                <img style="height: 100px; width: 100px;" src="{{pet.photo_url}}">
+
+                <a href="{{url_for('display_edit_form', pet_id=pet.id)}}">{{ pet.name}}</a>
+                
+                {% if pet.available %}
+                <span style="font-weight: bold;">is available</span>
+                {% endif %}
+            </td>
+        </tbody>
+        <br>
+    </table>
+    {% endfor %}
+    <form action="/add">
+    <button style="background-color: skyblue">Add Pet</button>
+    </form>
+</div>
+
+
+
+
+{% endblock %}

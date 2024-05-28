@@ -1,0 +1,37 @@
+{% block title %}Pet Edit{% endblock %}
+
+{% block content %}
+
+<h1>{{pet.name}}</h1>
+<div>
+{% if pet.photo_url %}
+<img src="{{pet.photo_url}}" style="height: 100px; width: 100px;">
+{% endif %}
+<p>Species: {{pet.species}}</p>
+<p>Pet Age: {{pet.age}}</p>
+</div>
+<h2>Update</h2>
+<div>
+<form id="pet-add-form" method="POST">
+    {{ form.hidden_tag() }} <!--add type=hidden form fields -->
+  
+    {% for field in form
+           if field.widget.input_type != 'hidden' %}
+  
+      <p>
+        {{ field.label }}
+        {{ field }}
+  
+        {% for error in field.errors %}
+          {{ error }}
+        {% endfor %}
+      </p>
+  
+    {% endfor %}
+  
+    <button type="submit" style="background-color: limegreen;">Save</button>
+    <button formaction="/{{pet.id}}/delete" style="background-color: crimson;">Bought</button>
+</form>
+</div>
+<form action="/"><button>Back</button></form>
+{% endblock %}
